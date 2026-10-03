@@ -14,25 +14,11 @@
   recognizable: true
   standsout: true
   physicalDesc: reagent-physical-desc-ferrous
-  reactiveEffects: # Trauma - blood can extinguish fires, worse than water though
-    Extinguish:
-      methods: [ Touch ]
-      effects:
-      - !type:Extinguish
-        fireStacksAdjustment: -0.5 # 1/3 as good as water, maybe it makes sense
   metabolisms:
     Digestion:
       metabolites:
         UncookedAnimalProteins: 0.2
       effects:
-      # <Trauma>
-      - !type:Satiate
-        satiationType: Hunger
-        factor: 1.0
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Vampire ]
-      # </Trauma>
       - !type:Satiate
         satiationType: Thirst
         factor: 1.0
@@ -45,8 +31,6 @@
         - !type:MetabolizerTypeCondition
           type: [ Bloodsucker ]
         damage:
-          Airloss: -3 # Trauma
-          Toxin: -1.25 # Trauma
           Brute: -3
           Burn: -1.25
     Bloodstream: # Don't inject someone else's blood into yourself! Your own blood won't actually metabolise.

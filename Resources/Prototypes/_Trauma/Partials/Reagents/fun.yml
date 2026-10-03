@@ -1,0 +1,11 @@
+- type: reagent
+  id: Razorium
+  tileReactions:
+  - !type:SpillTileReaction
+  reactiveEffects:
+    Acidic:
+      effects:
+      - !type:HealthChange
+        damage:
+          types: !Clear
+            Slash: 0.75

@@ -1,0 +1,161 @@
+- type: reagent
+  id: Dylovene
+  metabolisms:
+    Bloodstream:
+      metabolismRate: !Clear 0.25
+      effects:
+      - !type:HealthChange
+        damage:
+          types: !Clear
+            Poison: -0.75
+
+- type: reagent
+  id: Arithrazine
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Blunt: !Clear 0.5
+
+- type: reagent
+  id: Bicaridine
+  metabolisms:
+    Bloodstream:
+      metabolismRate: 0.25
+      effects:
+      - !type:EvenHealthChange
+        damage: !Clear
+          Brute: -1.0
+      - !type:HealthChange
+        conditions: !Clear
+        - !type:ReagentCondition
+          reagent: Bicaridine
+          min: 12
+      - !type:Vomit
+        conditions: !Clear
+        - !type:ReagentCondition
+          reagent: Bicaridine
+          min: 26
+      - !type:Jitter
+        conditions: !Clear
+        - !type:ReagentCondition
+          reagent: Bicaridine
+          min: 12
+
+- type: reagent
+  id: Cryoxadone
+  metabolisms:
+    Bloodstream:
+      effects:
+      #- !type:AdjustTemperature
+      #  amount: 60000 # Heats you up as it metabolizes necessitating constant cooling.
+      - !type:EvenHealthChange
+        scaleByTemperature: &cryo_scaling
+          min: 100.0
+          max: 213.0
+          scale: 1.6
+
+- type: reagent
+  id: Dermaline
+  metabolisms:
+    Bloodstream:
+      metabolismRate: !Clear 0.25
+      effects:
+      - !type:HealthChange
+        damage:
+          types: !Clear
+            Heat: -1
+            Shock: -1
+            Cold: -1
+
+
+- type: reagent
+  id: Kelotane
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:HealthChange
+        damage:
+          types: !Clear
+            Heat: -0.5
+            Shock: -0.5
+            Cold: -0.5
+
+
+- type: reagent
+  id: Holywater
+  metabolisms:
+    Digestion:
+      effects:
+      - !type:RemoveComponents
+        conditions:
+        - !type:ReagentCondition
+          reagent: Holywater
+          min: 40
+        components:
+        - type: VampireThrall
+      - !type:NestedEffect
+        conditions:
+        - !type:ReagentCondition
+          reagent: Holywater
+          min: 20
+        - !type:WhitelistCondition
+          whitelist:
+            components:
+            - Vampire
+        proto: VampireHolyWater
+      - !type:HealthChange
+        conditions:
+        damage:
+          types: !Clear
+            Asphyxiation: -2 #Hydrate the injured so they may have the strength to stand (Space Station 13:14, KJV)
+            Piercing: -0.2
+            Ballistic: -0.2
+            Slash: -0.2
+            Blunt: -0.2
+            Poison: -0.2
+            Heat: -0.2
+            Shock: -0.2
+            Cold: -0.2
+
+- type: reagent
+  id: Arcryox
+  metabolisms:
+    Bloodstream:
+      effects:
+      #- !type:AdjustTemperature
+      #  amount: 60000 # Heats you up as it metabolizes necessitating constant cooling.
+      scaleByTemperature: *cryo_scaling
+      damage: !Clear
+        Brute: -4.5
+        Burn: -4.5
+
+- type: reagent
+  id: Aloxadone
+  metabolisms:
+    Bloodstream:
+      effects:
+      #- !type:AdjustTemperature
+      #  amount: 80000
+      - !type:EvenHealthChange
+        conditions: !Clear
+        - !type:TemperatureCondition
+          max: 213.0
+        scaleByTemperature:
+          min: 100.0
+          max: 213.0
+          scale: 1.6
+        damage: !Clear
+          Burn: -10
+
+- type: reagent
+  id: PotassiumIodide
+  metabolisms:
+    Digestion:
+      effects:
+      - !type:HealthChange
+        damage:
+          types: !Clear
+            Radiation: -0.25

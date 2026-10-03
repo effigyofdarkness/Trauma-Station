@@ -1,0 +1,11 @@
+- type: reagent
+  id: Silicon
+  reactiveEffects:
+    Acidic: !Clear
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        splitDamage: Split
+        damage:
+          types:
+            Ion: -3

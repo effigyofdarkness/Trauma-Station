@@ -1,0 +1,75 @@
+- type: reagent
+  id: Mold
+  tileReactions:
+  - !type:SpillTileReaction
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:InfectDisease
+        probability: 0.1
+        scaleProbability: true # more moles more disease
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Vox ]
+          inverted: true
+        - !type:ReagentCondition
+          reagent: Mold
+          min: 0.5
+        disease: DiseaseBaseMouse # mostly guaranteed cough transmission, mold spores..?
+        mutate: true
+        mutationRate: 0.1
+
+- type: reagent
+  id: PolytrinicAcid
+  tileReactions:
+  - !type:SpillTileReaction
+  reactiveEffects:
+    Acidic:
+      effects:
+      - !type:HealthChange
+        damage:
+          types: !Clear
+            Caustic: 1
+
+- type: reagent
+  id: FluorosulfuricAcid
+  tileReactions:
+  - !type:SpillTileReaction
+  reactiveEffects:
+    Acidic:
+      effects:
+      - !type:HealthChange
+        damage:
+          types: !Clear
+            Caustic: 0.75
+
+- type: reagent
+  id: SulfuricAcid
+  tileReactions:
+  - !type:SpillTileReaction
+  reactiveEffects:
+    Acidic:
+      effects:
+      - !type:HealthChange
+        damage:
+          types: !Clear
+            Caustic: 0.3
+
+- type: reagent
+  id: UnstableMutagen
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:MutateDiseases
+        mutationRate: 0.08 # 5u equivalent to one normal disease hop
+
+- type: reagent
+  id: VentCrud
+  metabolisms:
+    Bloodstream:
+      effects:
+        - !type:Satiate
+          satiationType: Hunger
+          conditions:
+          - !type:MetabolizerTypeCondition
+            type: [ Vox ]

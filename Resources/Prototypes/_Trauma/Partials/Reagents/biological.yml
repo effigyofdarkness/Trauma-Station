@@ -1,20 +1,23 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: reagent
-  id: Slime
+  id: Blood
+  reactiveEffects:
+    Extinguish:
+      methods: [ Touch ]
+      effects:
+      - !type:Extinguish
+        fireStacksAdjustment: -0.5 # blood can extinguish fires 1/3rd as good as water, maybe it makes sense
   metabolisms:
     Digestion:
-      # Delicious!
-      effects: !Clear
+      effects:
       - !type:Satiate
         satiationType: Hunger
-        factor: 0.1
+        factor: 1.0
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Slime ]
-          inverted: true
-      - !type:ModifyBloodLevel
-        amount: 0.5 # drawing 15u removes 5% blood level from a slimeperson, this will add 5% when injecting 15u
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Slime ]
+          type: [ Vampire ]
+      - !type:EvenHealthChange
+        damage:
+          Airloss: -3
+          Toxin: -1.25

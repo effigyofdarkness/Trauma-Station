@@ -6,7 +6,7 @@
     Digestion:
       metabolites:
         Bleach: 1 # drinking bleach is NOT safe
-      effects:
+      effects: !Clear
       - !type:DiseaseProgressChange
         affectedType: Parasite
         progressModifier: -0.15

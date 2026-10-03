@@ -1,0 +1,18 @@
+- type: reagent
+  id: Ammonia
+  metabolisms:
+    Respiration:
+      effects:
+        - !type:InfectDisease # miasma gives you diseases
+          probability: 0.05
+          scaleProbability: true # more moles more disease
+          conditions:
+          - !type:MetabolizerTypeCondition
+            type: [ Rat, Vox ]
+            inverted: true
+          - !type:ReagentCondition
+            reagent: Ammonia
+            min: 0.5
+          disease: DiseaseBaseMouse # mostly guaranteed cough transmission
+          mutate: true
+          mutationRate: 3 # very random
